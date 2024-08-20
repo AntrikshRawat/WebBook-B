@@ -1,10 +1,14 @@
 /* eslint-disable no-unused-vars */
 const mongoose = require('mongoose');
-const mongoURI = "mongodb://localhost:27017/webook";
+const mongoURI = "mongodb+srv://antrikshrawat2:<Antriksh@Rawat31>@ar-cluster.eio7o.mongodb.net/?retryWrites=true&w=majority&appName=AR-CLUSTER";
 
 const connetToMongo = async ()=>{
-          await mongoose.connect(mongoURI);
-          console.log("connected successfully!");
+          try{
+await mongoose.connect(mongoURI);
+console.log("connected successfully!");
+          }catch(error) {
+                    console.log(error);
+          }
 }
 
 module.exports = connetToMongo;
