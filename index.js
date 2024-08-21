@@ -1,7 +1,7 @@
-const connetToMongo = require("./database");
+const connectToMongo = require("./database");
 const express = require('express');
 const cors = require("cors");
-connetToMongo();
+connectToMongo();
 const app = express();
 const port =5000;
 

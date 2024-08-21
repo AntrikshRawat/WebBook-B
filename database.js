@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 const mongoose = require('mongoose');
-const mongoURI = "mongodb+srv://antrikshrawat2:<Antriksh@Rawat31>@ar-cluster.eio7o.mongodb.net/?retryWrites=true&w=majority&appName=AR-CLUSTER";
+const mongoURI = "mongodb+srv://antrikshrawat2:antrikshrawat2@ar-cluster.eio7o.mongodb.net/?retryWrites=true&w=majority&appName=AR-CLUSTER";
 
-const connetToMongo = async ()=>{
+const connectToMongo = async ()=>{
 try{
 await mongoose.connect(mongoURI);
 console.log("connected successfully!");
@@ -11,4 +11,4 @@ console.log("connected successfully!");
  }
 }
 
-module.exports = connetToMongo;
+module.exports = connectToMongo;
