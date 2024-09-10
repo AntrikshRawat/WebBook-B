@@ -107,15 +107,24 @@ router.post('/login',[
 
 //get the details of loggedin user by POST:"/auth/getuser" login required
 router.post('/getuser',fetchuser,async (req,res)=>{
-try {
-  let userId = req.user.id;
-  const user =  await User.findById(userId).select("-password");
+try{
+  let userid = req.user.id;
+  const user = await User.findById(userid).select("-password");
   success = true;
-  res.send(success ,user);
-} catch (error) {
-  console.error(error);
+  res.send({success,user});
+}catch(error) {
   success = false;
-  res.status(500).send(success ,"some error occured");
+  res.send({success,error});
 }
+// try {
+//   let userId = req.user.id;
+//   const user =  await User.findById(userId).select("-password");
+//   success = true;
+//   res.send(success ,user);
+// } catch (error) {
+//   console.error(error);
+//   success = false;
+//   res.status(500).send(success ,"some error occured");
+// }
 })
 module.exports = router;

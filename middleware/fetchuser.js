@@ -12,7 +12,8 @@ const fetchuser = async (req, res, next) => {
               next();  
         }  catch (error) {
           console.error(error.message);
-          res.status(401).send("some error occured");
+          success = false;
+          res.status(401).send({success,error});
         }  
 }
 module.exports = fetchuser;
