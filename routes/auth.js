@@ -111,10 +111,9 @@ try {
   let userId = req.user.id;
   const user =  await User.findById(userId).select("-password");
   success = true;
-  res.send(success);
+  res.send(success ,user);
 } catch (error) {
   console.error(error);
-  
   success = false;
   res.status(500).send(success ,"some error occured");
 }
