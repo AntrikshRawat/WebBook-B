@@ -111,10 +111,10 @@ try {
   let userId = req.user.id;
   const user =  await User.findById(userId).select("-password");
   success = true;
-  res.json({success ,user});
+  res.send({success ,user});
 } catch (error) {
   success = false;
-  res.status(500).send(success);
+  res.status(500).send("Invalid AuthToken");
 }
 })
 module.exports = router;
