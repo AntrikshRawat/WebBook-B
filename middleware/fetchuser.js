@@ -7,13 +7,13 @@ const fetchuser = async (req, res, next) => {
                     return res.status(401).send("you need to login first!");
           }
         try {
-              const data = jwt.verify(token , SECRET_SIGN);
+            const data = jwt.verify(token , SECRET_SIGN);
               req.user = data.user;
               next(); 
         }  catch (error) {
           console.error(error.message);
           success = false;
-          res.status(401).send({success,error});
+          res.status(401).json({success,error});
         }  
 }
 module.exports = fetchuser;
