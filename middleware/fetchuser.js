@@ -9,7 +9,7 @@ const fetchuser = async (req, res, next) => {
         try {
               const data = jwt.verify(token , SECRET_SIGN);
               req.user = data.user;
-              next();  
+              next(); 
         }  catch (error) {
           console.error(error.message);
           success = false;
