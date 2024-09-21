@@ -6,6 +6,7 @@ const router = express.Router();
 const User = require("../models/User");
 const fetchuser = require('../middleware/fetchuser');
 const { validationResult, body } = require('express-validator');
+const sendEmail = require("../middleware/Verification");
 let success = false;
 const SECRET_SIGN = 'vijay';
 //Create a User Using:POST "/api/auth/createuser". No login requires
@@ -115,6 +116,34 @@ try {
 } catch (error) {
   success = false;
   res.status(500).send("Invalid AuthToken");
+}
+})
+router.put('/verification',fetchuser,async(req , res)=>{
+try{
+    let userId = req.user.id;
+  const userInfo = await User.findById(userId);
+    let result = await sendEmail(userInfo.email);
+      res.json(result);
+}catch(error){
+  res.send(error);
+}
+})
+router.post('/resetpassword',fetchuser,async(req,res)=>{
+try{ 
+    let userId = req.user.id;
+    const userInfo = await User.findById(userId);
+    const password = req.body.password;
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    const passCompare = await bcrypt.compare(hashedPassword,userInfo.password);
+    if(passCompare) {
+     return res.json("New and Old Password can't be same");
+    }
+    userInfo.password = hashedPassword;
+    userInfo.save();
+    res.json("password updated successfully");
+}catch(error){
+  res.json("Internal Server Error");
 }
 })
 module.exports = router;
