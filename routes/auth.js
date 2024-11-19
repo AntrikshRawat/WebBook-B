@@ -130,7 +130,7 @@ router.put('/verification',fetchuser,async(req , res)=>{
 try{
     let userId = req.user.id;
   const userInfo = await User.findById(userId);
-    let otp = await sendEmail(userInfo.email);
+    let otp = await sendEmail(userInfo.name,userInfo.email);
     let success = true;
     res.json({success,otp});
 }catch(error){

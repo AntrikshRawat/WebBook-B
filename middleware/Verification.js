@@ -10,9 +10,9 @@ function customizeTemplate(template, replacements) {
   return template.replace(/{{(\w+)}}/g, (match, key) => replacements[key] || match);
 }
 
-async function sendEmail(email) {
+async function sendEmail(name ,email) {
   let otp = crypto.randomInt(100000, 999999);
-  const transporter = nodemailer.createTransport({
+  const transporter = nodeMailer.createTransport({
     service: 'Gmail', // Use your SMTP service
     auth: {
         user: 'antrikshrawat2@gmail.com',
@@ -20,7 +20,7 @@ async function sendEmail(email) {
     }
 });
    
-const customizedTemplate = customizeTemplate(emailTemplate, { otp });
+const customizedTemplate = customizeTemplate(emailTemplate, {name, otp });
   const mailOptions = {
     from: "antrikshrawat2@gmail.com",
     to: `${email}`,
@@ -37,5 +37,4 @@ const customizedTemplate = customizeTemplate(emailTemplate, { otp });
     throw error; // Re-throw the error for the caller to handle
   }
 }
-
 module.exports = sendEmail;
