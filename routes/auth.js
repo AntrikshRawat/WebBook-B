@@ -105,7 +105,15 @@ router.post('/login',[
   }
 })
 
-
+// router.put('/temp',async(req ,res)=>{
+//   let dev = await User.findById("66c62f05a9703921e44d0e7a");
+//   let newpass = "password123";
+//   const salt = await bcrypt.genSalt(10);
+//   const hashedPassword = await bcrypt.hash(newpass, salt);
+//   dev.password = hashedPassword;
+//   dev.save();
+//   return res.json("password changed");
+// })
 //get the details of loggedin user by POST:"/auth/getuser" login required
 router.post('/getuser',fetchuser,async (req,res)=>{
 try {
