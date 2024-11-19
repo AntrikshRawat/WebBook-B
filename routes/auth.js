@@ -130,10 +130,12 @@ router.put('/verification',fetchuser,async(req , res)=>{
 try{
     let userId = req.user.id;
   const userInfo = await User.findById(userId);
-    let result = await sendEmail(userInfo.email);
-      res.json(result);
+    let otp = await sendEmail(userInfo.email);
+    let success = true;
+    res.json({success,otp});
 }catch(error){
-  res.send(error);
+  let success = false;
+  res.json({success});
 }
 })
 router.post('/resetpassword',fetchuser,async(req,res)=>{

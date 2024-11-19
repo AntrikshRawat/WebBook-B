@@ -30,10 +30,12 @@ const customizedTemplate = customizeTemplate(emailTemplate, { otp });
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    console.log('OTP Email Sent');
-} catch (error) {
-    console.error('Error Sending Email');
-}
+    console.log('OTP Email Sent:', info.response);
+    return otp; // Return OTP for further processing (if needed)
+  } catch (error) {
+    console.error('Error Sending Email:', error.message);
+    throw error; // Re-throw the error for the caller to handle
+  }
 }
 
 module.exports = sendEmail;
